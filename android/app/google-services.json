@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "292995348302",
+    "firebase_url": "https://anboba-default-rtdb.firebaseio.com",
+    "project_id": "anboba",
+    "storage_bucket": "anboba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292995348302:android:1bc290c68ea0d3011b101f",
+        "android_client_info": {
+          "package_name": "com.anoba.useerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292995348302-uk1pmaed1squg1661s4m0rei1imku07e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0dsQNuxb6tRzI_6mTo9ErJ4smqdanp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292995348302-uk1pmaed1squg1661s4m0rei1imku07e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.anboba"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292995348302:android:79dc538d2b96c3df1b101f",
+        "android_client_info": {
+          "package_name": "com.example.anboba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292995348302-uk1pmaed1squg1661s4m0rei1imku07e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0dsQNuxb6tRzI_6mTo9ErJ4smqdanp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292995348302-uk1pmaed1squg1661s4m0rei1imku07e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.anboba"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
