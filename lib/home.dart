@@ -1,10 +1,15 @@
 import 'dart:async';
-
+import 'package:firebase_database/firebase_database.dart';
+import 'package:google_places_autocomplete_text_field/google_places_autocomplete_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_places_autocomplete_text_field/model/prediction.dart';
 import 'package:lottie/lottie.dart';
+import 'package:place_picker/place_picker.dart';
+
+import 'login page/global.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,6 +25,9 @@ class _HomeState extends State<Home> {
   late LatLng _defaultLatLng;
   late LatLng _draggedLatlng;
   String _draggedAddress = "";
+  TextEditingController searchbarcontroller = TextEditingController();
+  String? lat;
+  String? long;
 
   @override
   void initState() {
@@ -39,22 +47,52 @@ class _HomeState extends State<Home> {
     _gotoUserCurrentPosition();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(),
-      //get a float button to click and go to current location
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _gotoUserCurrentPosition();
-        },
-        child: Icon(Icons.location_on),
-      ),
-    );
+  Future<void> _liveLocation() async {
+    LocationSettings locationSettings = const LocationSettings(
+        accuracy: LocationAccuracy.high, distanceFilter: 100);
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((Position position) {
+      lat = position.latitude.toString();
+      long = position.longitude.toString();
+      print("=========================================");
+      print("$lat");
+    });
+  }
+
+  Future sendinglocation() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref().child("trender");
+
+    await ref.child(fAuth.currentUser!.uid).set({
+      "name": fAuth.currentUser?.uid,
+      "age": 'https://www.google.com/maps/search/$lat,$long',
+      "adress": _draggedAddress,
+    });
   }
 
   Widget _buildBody() {
-    return Stack(children: [_getMap(), _getCustomPin(), _showDraggedAddress()]);
+    return Stack(children: [
+      _getMap(),
+      _getCustomPin(),
+      _showDraggedAddress(),
+      _searchBar(),
+      _button()
+    ]);
+  }
+
+  Widget _button() {
+    return Padding(
+      padding: const EdgeInsets.all(50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                _liveLocation();
+              },
+              child: Text("efdfdf"))
+        ],
+      ),
+    );
   }
 
   Widget _showDraggedAddress() {
@@ -71,6 +109,30 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
       ),
+    );
+  }
+
+  Widget _searchBar() {
+    return Container(
+      padding: EdgeInsets.only(top: 100, left: 30, right: 30),
+      child: GooglePlacesAutoCompleteTextFormField(
+          textEditingController: searchbarcontroller,
+          googleAPIKey: "AIzaSyBp0dsQNuxb6tRzI_6mTo9ErJ4smqdanp8",
+          inputDecoration: InputDecoration(hintText: "Search your location"),
+          debounceTime: 800,
+          isLatLngRequired: true,
+          countries: ["EG"],
+          getPlaceDetailWithLatLng: (Prediction prediction) {
+            print("placeDetails" + prediction.lng.toString());
+          },
+          itmClick: (Prediction prediction) {
+            searchbarcontroller.text = prediction.description!;
+
+            searchbarcontroller.selection = TextSelection.fromPosition(
+                TextPosition(offset: prediction.description!.length));
+          }
+          // default 600 ms ,
+          ),
     );
   }
 
@@ -167,5 +229,21 @@ class _HomeState extends State<Home> {
 
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildBody(),
+      //get a float button to click and go to current location
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //_gotoUserCurrentPosition();
+          sendinglocation();
+          //_liveLocation();
+        },
+        child: Icon(Icons.location_on),
+      ),
+    );
   }
 }

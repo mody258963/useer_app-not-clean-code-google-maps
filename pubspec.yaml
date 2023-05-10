@@ -48,6 +48,10 @@ dependencies:
   get: ^4.6.5
   geocoding: ^2.1.0
   lottie: ^2.3.2
+  google_places_autocomplete_text_field: ^0.0.3
+  place_picker: ^0.10.0
+  flutter_google_places_web: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:
