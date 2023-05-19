@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_autocomplete_text_field/model/prediction.dart';
 import 'package:lottie/lottie.dart';
 import 'package:place_picker/place_picker.dart';
+import 'package:useer_app/homesnap.dart';
+import 'package:useer_app/order.dart';
 
 import 'login page/global.dart';
 
@@ -234,6 +236,31 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: ListView(children: [
+          ListTile(
+            title: Text("home "),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: Text("orders "),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Orderpage(),
+                  ));
+            },
+          )
+        ]),
+      ),
       body: _buildBody(),
       //get a float button to click and go to current location
       floatingActionButton: FloatingActionButton(
