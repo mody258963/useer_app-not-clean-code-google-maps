@@ -10,11 +10,19 @@ class Xbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.05,
       width: MediaQuery.of(context).size.width * 0.77,
       child: ElevatedButton(
         onPressed: () => page,
+        style: ElevatedButton.styleFrom(
+          alignment: Alignment.centerLeft,
+          shape: const RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.horizontal(left: Radius.zero, right: Radius.zero),
+          ),
+          backgroundColor: Colors.black,
+        ),
         child: Text(
           text,
           textAlign: TextAlign.end,
@@ -24,14 +32,6 @@ class Xbutton extends StatelessWidget {
             fontWeight: FontWeight.w800,
             fontSize: 16,
           ),
-        ),
-        style: ElevatedButton.styleFrom(
-          alignment: Alignment.centerLeft,
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.horizontal(left: Radius.zero, right: Radius.zero),
-          ),
-          backgroundColor: Colors.black,
         ),
       ),
     );

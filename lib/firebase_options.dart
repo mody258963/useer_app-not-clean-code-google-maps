@@ -49,36 +49,40 @@ class DefaultFirebaseOptions {
     messagingSenderId: '292995348302',
     projectId: 'anboba',
     authDomain: 'anboba.firebaseapp.com',
+    databaseURL: 'https://anboba-default-rtdb.firebaseio.com',
     storageBucket: 'anboba.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBp0dsQNuxb6tRzI_6mTo9ErJ4smqdanp8',
-    appId: '1:292995348302:android:79dc538d2b96c3df1b101f',
+    appId: '1:292995348302:android:1bc290c68ea0d3011b101f',
     messagingSenderId: '292995348302',
     projectId: 'anboba',
+    databaseURL: 'https://anboba-default-rtdb.firebaseio.com',
     storageBucket: 'anboba.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyABhqWhOFiaaapbKe45ZUoig9-6tw7LOOk',
-    appId: '1:292995348302:ios:df313057250419f71b101f',
+    appId: '1:292995348302:ios:86765402113a55471b101f',
     messagingSenderId: '292995348302',
     projectId: 'anboba',
+    databaseURL: 'https://anboba-default-rtdb.firebaseio.com',
     storageBucket: 'anboba.appspot.com',
-    iosClientId:
-        '292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.anboba',
+    androidClientId: '292995348302-vkt5u43pvjmdqdvsbvj99ludktrioa69.apps.googleusercontent.com',
+    iosClientId: '292995348302-qh8iia0iqp3m2lljkj5kvnv8c00rr53j.apps.googleusercontent.com',
+    iosBundleId: 'com.example.useerApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyABhqWhOFiaaapbKe45ZUoig9-6tw7LOOk',
-    appId: '1:292995348302:ios:df313057250419f71b101f',
+    appId: '1:292995348302:ios:86765402113a55471b101f',
     messagingSenderId: '292995348302',
     projectId: 'anboba',
+    databaseURL: 'https://anboba-default-rtdb.firebaseio.com',
     storageBucket: 'anboba.appspot.com',
-    iosClientId:
-        '292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.anboba',
+    androidClientId: '292995348302-vkt5u43pvjmdqdvsbvj99ludktrioa69.apps.googleusercontent.com',
+    iosClientId: '292995348302-qh8iia0iqp3m2lljkj5kvnv8c00rr53j.apps.googleusercontent.com',
+    iosBundleId: 'com.example.useerApp',
   );
 }

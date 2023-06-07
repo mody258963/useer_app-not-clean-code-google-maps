@@ -1,9 +1,10 @@
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:useer_app/order.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.yellow,
-          boxShadow: [BoxShadow(color: Colors.white)],
+          boxShadow: const [BoxShadow(color: Colors.white)],
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(smap['name']),
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 reference.child(smap['key']).set(smap);
                 starCountRef.child(smap['key']).remove();
               },
-              child: Text("ddffdf"))
+              child: const Text("ddffdf"))
         ]),
       ));
 
@@ -41,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text('Home Screen'),
+          title: const Text('Home Screen'),
         ),
-        body: Container(
+        body: SizedBox(
           height: double.infinity,
           child: FirebaseAnimatedList(
             query: dreamA,

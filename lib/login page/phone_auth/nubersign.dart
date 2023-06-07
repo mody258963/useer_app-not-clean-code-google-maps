@@ -1,24 +1,23 @@
-import 'dart:ffi';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:useer_app/app%20settings/dumyboutton.dart';
 import 'package:useer_app/login%20page/global.dart';
+import 'package:useer_app/login%20page/phone_auth/verfyScreen.dart';
 
 class Phoneauth extends StatefulWidget {
   const Phoneauth({super.key});
+  static String verfyId = "";
 
   @override
   State<Phoneauth> createState() => _PhoneauthState();
 }
 
 class _PhoneauthState extends State<Phoneauth> {
-  Color? colorgray = Color.fromARGB(255, 189, 189, 189);
-  String verfyId = "";
+  Color? colorgray = const Color.fromARGB(255, 189, 189, 189);
 
   Future<void> signupWithnumber() async {
     try {
       await fAuth.verifyPhoneNumber(
-        phoneNumber: '+20$phoneconttroller',
+        phoneNumber: '+20${phoneconttroller.text}',
         verificationCompleted: (PhoneAuthCredential credential) {
           print(credential.verificationId);
         },
@@ -26,7 +25,14 @@ class _PhoneauthState extends State<Phoneauth> {
           print(e);
         },
         codeSent: (String verificationId, int? resendToken) {
-          verfyId = verificationId;
+          Phoneauth.verfyId = verificationId;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => verfyOPT(
+                        verificationId: verificationId,
+                      )));
+          print("code sent====================");
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
@@ -60,7 +66,7 @@ class _PhoneauthState extends State<Phoneauth> {
                   ],
                 ),
               ),
-              Column(
+              const Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
@@ -124,10 +130,33 @@ class _PhoneauthState extends State<Phoneauth> {
                           )),
                       Padding(
                         padding: const EdgeInsets.only(right: 25, top: 150),
-                        child: Xbutton(
-                            text: "                             Sign Up",
-                            icons: Icon(Icons.arrow_forward),
-                            page: signupWithnumber()),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.77,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              signupWithnumber();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              alignment: Alignment.centerLeft,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.zero, right: Radius.zero),
+                              ),
+                              backgroundColor: Colors.black,
+                            ),
+                            child: const Text(
+                              "                             Sign Up",
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       Row(children: [
                         Padding(
@@ -142,12 +171,12 @@ class _PhoneauthState extends State<Phoneauth> {
                           ),
                           child: TextButton(
                               onPressed: () {},
-                              child: Text("Sign In",
+                              child: const Text("Sign In",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold))),
                         )
-                      ])
+                      ]),
                     ],
                   ),
                 ],

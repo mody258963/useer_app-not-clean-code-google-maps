@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_places_autocomplete_text_field/google_places_autocomplete_text_field.dart';
 import 'package:flutter/material.dart';
@@ -7,22 +8,21 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_autocomplete_text_field/model/prediction.dart';
 import 'package:lottie/lottie.dart';
-import 'package:place_picker/place_picker.dart';
 import 'package:useer_app/homesnap.dart';
 import 'package:useer_app/order.dart';
 
 import 'login page/global.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class googleMapPage extends StatefulWidget {
+  const googleMapPage({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<googleMapPage> createState() => _googleMapPageState();
 }
 
-class _HomeState extends State<Home> {
+class _googleMapPageState extends State<googleMapPage> {
   //get map controller to access map
-  Completer<GoogleMapController> _googleMapController = Completer();
+  final Completer<GoogleMapController> _googleMapController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _defaultLatLng;
   late LatLng _draggedLatlng;
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
 
   _init() {
     //set default latlng for camera position
-    _defaultLatLng = LatLng(11, 104);
+    _defaultLatLng = const LatLng(11, 104);
     _draggedLatlng = _defaultLatLng;
     _cameraPosition =
         CameraPosition(target: _defaultLatLng, zoom: 17.5 // number of map view
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 _liveLocation();
               },
-              child: Text("efdfdf"))
+              child: const Text("efdfdf"))
         ],
       ),
     );
@@ -102,13 +102,14 @@ class _HomeState extends State<Home> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 60,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.blue,
         ),
         child: Center(
             child: Text(
           _draggedAddress,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
       ),
     );
@@ -116,16 +117,17 @@ class _HomeState extends State<Home> {
 
   Widget _searchBar() {
     return Container(
-      padding: EdgeInsets.only(top: 100, left: 30, right: 30),
+      padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
       child: GooglePlacesAutoCompleteTextFormField(
           textEditingController: searchbarcontroller,
           googleAPIKey: "AIzaSyBp0dsQNuxb6tRzI_6mTo9ErJ4smqdanp8",
-          inputDecoration: InputDecoration(hintText: "Search your location"),
+          inputDecoration:
+              const InputDecoration(hintText: "Search your location"),
           debounceTime: 800,
           isLatLngRequired: true,
-          countries: ["EG"],
+          countries: const ["EG"],
           getPlaceDetailWithLatLng: (Prediction prediction) {
-            print("placeDetails" + prediction.lng.toString());
+            print("placeDetails${prediction.lng}");
           },
           itmClick: (Prediction prediction) {
             searchbarcontroller.text = prediction.description!;
@@ -165,7 +167,7 @@ class _HomeState extends State<Home> {
 
   Widget _getCustomPin() {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 80,
         height: 60,
         child: Lottie.asset("assets/pin.json"),
@@ -240,23 +242,29 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(children: [
           ListTile(
-            title: Text("home "),
+            title: const Text("home "),
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
+                    builder: (context) => const HomeScreen(),
                   ));
             },
           ),
           ListTile(
-            title: Text("orders "),
+            title: const Text("orders "),
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Orderpage(),
+                    builder: (context) => const Orderpage(),
                   ));
+            },
+          ),
+          ListTile(
+            title: const Text("Sign out "),
+            onTap: () async {
+              await FirebaseAuth.instance.signOut();
             },
           )
         ]),
@@ -269,7 +277,7 @@ class _HomeState extends State<Home> {
           sendinglocation();
           //_liveLocation();
         },
-        child: Icon(Icons.location_on),
+        child: const Icon(Icons.location_on),
       ),
     );
   }

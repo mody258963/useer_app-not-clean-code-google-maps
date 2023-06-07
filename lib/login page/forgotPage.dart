@@ -1,22 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:useer_app/login%20page/SIGNUP.dart';
-import 'package:useer_app/login%20page/forgotPage.dart';
+import 'package:useer_app/login%20page/login.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ForigotPage extends StatefulWidget {
+  const ForigotPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ForigotPage> createState() => _ForigotPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ForigotPageState extends State<ForigotPage> {
+  Color? colorgray = const Color.fromARGB(255, 189, 189, 189);
+  TextEditingController phoneconttroller = TextEditingController();
   final emailcontroller = TextEditingController();
   final passwodconttroler = TextEditingController();
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
-  Color? colorgray = const Color.fromARGB(255, 189, 189, 189);
 
-  bool code = false;
+  Future restpass() async {
+    var formdata = formstate.currentState;
+    if (formdata!.validate()) {
+      try {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: emailcontroller.text.trim());
+        weekpass();
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        retryagan();
+      }
+    }
+  }
 
   void weekpass() {
     showDialog(
@@ -24,46 +36,28 @@ class _LoginPageState extends State<LoginPage> {
         barrierDismissible: true,
         builder: (context) {
           return const AlertDialog(
-            content: Text("Password is Incorect"),
-            title: Text("Wronge Password"),
+            content: Text("Email Sent "),
+            title: Text("Check Your Email"),
           );
         });
   }
 
-  void weekemail() {
+  void retryagan() {
     showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) => const AlertDialog(
-        content: Text("Email is not found"),
-        title: Text("Make a New Email"),
-      ),
-    );
-  }
-
-  Future signip() async {
-    var formdata = formstate.currentState;
-    if (formdata!.validate()) {
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailcontroller.text.trim(),
-            password: passwodconttroler.text.trim());
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          weekemail();
-        } else if (e.code == 'wrong-password') {
-          weekpass();
-        }
-        return null;
-      }
-    }
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text("Retry"),
+            title: Text("Retry again later"),
+          );
+        });
   }
 
   @override
   void dispose() {
     super.dispose();
     emailcontroller.dispose();
-    passwodconttroler.dispose();
   }
 
   @override
@@ -78,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 58,
+                    top: 42,
                     left: 350,
                   ),
                   child: Column(
@@ -98,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.only(
                         left: 300,
                         bottom: 70,
-                        top: 62,
+                        top: 46,
                       ),
                       child: Text("Anbobtk",
                           style: TextStyle(
@@ -108,10 +102,10 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 0,
-                        right: 210,
+                        right: 70,
                       ),
                       child: Text(
-                        "Hi !",
+                        "Oh, no !",
                         style: TextStyle(
                             fontSize: width * 0.16,
                             fontWeight: FontWeight.bold),
@@ -119,10 +113,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        right: 50,
+                        right: 65,
                       ),
                       child: Text(
-                        " Welcome",
+                        "I forgot",
                         style: TextStyle(
                             fontSize: width * 0.16,
                             fontWeight: FontWeight.bold),
@@ -137,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Padding(
                           padding: const EdgeInsets.only(
-                            top: 350,
+                            top: 380,
                             left: 35,
                             right: 60,
                           ),
@@ -169,46 +163,14 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           )),
                       Padding(
-                          padding: const EdgeInsets.only(
-                            top: 30,
-                            left: 35,
-                            right: 60,
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value!.length > 30) {
-                                return "Password is very long";
-                              }
-                              if (value.length < 7) {
-                                return "Password is very short";
-                              } else {
-                                return null;
-                              }
-                            },
-                            controller: passwodconttroler,
-                            maxLines: 1,
-                            cursorColor: colorgray,
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              enabledBorder: UnderlineInputBorder(
-                                //<-- SEE HERE
-                                borderSide: BorderSide(
-                                    width: 2.3, color: colorgray as Color),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: colorgray as Color, width: 3.8),
-                              ),
-                            ),
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 25, top: 150),
+                        padding: const EdgeInsets.only(
+                            right: 25, top: 70, bottom: 200),
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05,
                           width: MediaQuery.of(context).size.width * 0.77,
                           child: ElevatedButton(
                             onPressed: () {
-                              signip();
+                              restpass();
                             },
                             style: ElevatedButton.styleFrom(
                               alignment: Alignment.centerLeft,
@@ -219,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: Colors.black,
                             ),
                             child: Text(
-                              "Sign In",
+                              "Rest Password",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
@@ -231,30 +193,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20, top: 80),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForigotPage()));
-                            },
-                            child: Text(
-                              "Forgot Password ?",
-                              style: TextStyle(
-                                  fontSize: width * 0.04,
-                                  fontWeight: FontWeight.normal,
-                                  color: colorgray),
-                            )),
-                      ),
                       Row(children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 5, left: 120),
-                          child: Text("Create Account ?",
+                          padding: const EdgeInsets.only(top: 5, left: 100),
+                          child: Text("Already have an account?",
                               style: TextStyle(
                                   color: colorgray as Color,
-                                  fontSize: width * 0.035)),
+                                  fontSize: width * 0.03)),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -265,9 +210,9 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const SignUpPage()));
+                                            const LoginPage()));
                               },
-                              child: Text("Sign Up",
+                              child: Text("Sign In",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,

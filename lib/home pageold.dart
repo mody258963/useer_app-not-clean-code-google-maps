@@ -1,40 +1,37 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:useer_app/login%20page/global.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeOld extends StatefulWidget {
+  const HomeOld({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeOld> createState() => _HomeOldState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeOldState extends State<HomeOld> {
   Stream<QuerySnapshot>? changer;
   double padding = 10;
   DatabaseReference driverRef = FirebaseDatabase.instance.ref();
   late String lat;
   late String long;
 
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 // on below line we have specified camera position
-  static final CameraPosition _kGoogle = const CameraPosition(
+  static const CameraPosition _kGoogle = CameraPosition(
     target: LatLng(20.42796133580664, 80.885749655962),
     zoom: 14.4746,
   );
   GoogleMapController? newGoogleMapController;
 
   final List<Marker> _markers = <Marker>[
-    Marker(
+    const Marker(
         markerId: MarkerId('1'),
         position: LatLng(20.42796133580664, 75.885749655962),
         infoWindow: InfoWindow(
@@ -232,7 +229,7 @@ class _HomeState extends State<Home> {
         .then((value) {})
         .onError((error, stackTrace) async {
       await Geolocator.requestPermission();
-      print("ERROR" + error.toString());
+      print("ERROR$error");
     });
     return await Geolocator.getCurrentPosition();
   }
@@ -242,7 +239,7 @@ class _HomeState extends State<Home> {
     await canLaunchUrlString(googleurl)
         ? await launchUrlString(googleurl)
         : throw ' ca++++==== $googleurl';
-    print('$googleurl');
+    print(googleurl);
   }
 
   @override
@@ -310,7 +307,7 @@ class _HomeState extends State<Home> {
                     width: MediaQuery.of(context).size.width * 1,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15)),
                         border: Border.all(color: Colors.white)),
@@ -335,7 +332,7 @@ class _HomeState extends State<Home> {
                                 onPressed: () {
                                   showBottomSheet(
                                     context: context,
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.vertical(
                                             top: Radius.circular(20))),
                                     builder: (context) {
@@ -348,14 +345,16 @@ class _HomeState extends State<Home> {
                                                 0.50,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    topRight:
-                                                        Radius.circular(20)),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(20),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                20)),
                                                 border: Border.all(
                                                     color: Colors.black)),
-                                            child: Stack(children: const [
+                                            child: const Stack(children: [
                                               Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: TextField(),
@@ -367,7 +366,8 @@ class _HomeState extends State<Home> {
                                     },
                                   );
                                 },
-                                child: Text("sdfasdfsafsdsdssdasdasdsadasd",
+                                child: const Text(
+                                    "sdfasdfsafsdsdssdasdasdsadasd",
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 17)),
@@ -376,10 +376,9 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 90, right: 30, left: 40),
-                        child: const Divider(
+                      const Padding(
+                        padding: EdgeInsets.only(top: 90, right: 30, left: 40),
+                        child: Divider(
                           color: Colors.black,
                           thickness: 1,
                         ),

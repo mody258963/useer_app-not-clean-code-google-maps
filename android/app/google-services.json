@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com",
+              "client_id": "292995348302-2ar14193d37sdtkdjfdihe542oh60ekt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.anboba"
+                "bundle_id": "com.example.driver.RunnerTests"
               }
             }
           ]
@@ -50,6 +50,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "292995348302-vkt5u43pvjmdqdvsbvj99ludktrioa69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anboba",
+            "certificate_hash": "385919c7b8cb01acd0592856f2a4dbf6b96a6a63"
+          }
+        },
         {
           "client_id": "292995348302-uk1pmaed1squg1661s4m0rei1imku07e.apps.googleusercontent.com",
           "client_type": 3
@@ -68,10 +76,10 @@
               "client_type": 3
             },
             {
-              "client_id": "292995348302-t8g24kjmcq264tfkq082pio7ig1fl0i8.apps.googleusercontent.com",
+              "client_id": "292995348302-2ar14193d37sdtkdjfdihe542oh60ekt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.anboba"
+                "bundle_id": "com.example.driver.RunnerTests"
               }
             }
           ]

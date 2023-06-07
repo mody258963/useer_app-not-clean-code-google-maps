@@ -26,8 +26,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: LanguageChanger(),
-      locale: Locale('en', 'US'),
-      home: Auth(),
+      locale: const Locale('en', 'US'),
+      home: const Auth(),
       debugShowCheckedModeBanner: false,
     );
   }
