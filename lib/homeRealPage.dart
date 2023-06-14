@@ -1,11 +1,8 @@
-import 'dart:async';
-
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:useer_app/snapshot.dart';
+import 'package:useer_app/homescreen/anboba.dart';
+
+import 'homescreen/hose.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 int conter = 0;
+int conter1 = 0;
 
 class _HomePageState extends State<HomePage> {
   Color GrayOfProduct = Color.fromARGB(153, 240, 227, 227);
@@ -34,10 +32,11 @@ class _HomePageState extends State<HomePage> {
             colors: [
               Color.fromARGB(240, 240, 212, 140),
               Color.fromARGB(255, 245, 235, 219),
-              Color.fromARGB(255, 255, 255, 242),
-              Color.fromARGB(255, 255, 255, 242),
-              Color.fromARGB(255, 255, 255, 242),
-              Color.fromARGB(255, 255, 255, 242),
+              Color.fromARGB(255, 255, 255, 252),
+              Color.fromARGB(255, 255, 255, 252),
+              Color.fromARGB(255, 255, 255, 252),
+              Color.fromARGB(255, 255, 255, 252),
+              Color.fromARGB(255, 255, 255, 252),
               Color.fromARGB(255, 245, 235, 219),
               Color.fromARGB(240, 240, 212, 140),
             ],
@@ -150,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        right: 300, top: 20.6),
+                                        right: 300, top: 25),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
@@ -175,23 +174,111 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         bottom: 0,
-                                        right: 130,
-                                        left: 0,
-                                        top: 20),
+                                        right: 200,
+                                        left: 40,
+                                        top: 8),
                                     child: Image.asset(
-                                      'assets/boba1.png',
-                                      height: height * 0.15,
-                                      width: width * 0.17,
+                                      'assets/gas.png',
+                                      height: height * 0.17,
+                                      width: width * 0.19,
                                     ),
                                   ),
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 150),
+                                padding: const EdgeInsets.only(left: 100),
                                 child: Container(
-                                  height: height * 0.2,
-                                  width: width * 0.2,
+                                  height: height * 0.25,
+                                  width: width * 0.80,
                                   child: AmbobaDetals(
+                                    width: width * 0.05,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 190),
+                        child: Container(
+                          height: height * 0.185,
+                          width: width * 0.82,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(153, 240, 227, 227),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Stack(
+                            children: [
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 300),
+                                    child: CupertinoButton(
+                                        minSize: double.minPositive,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            conter1++;
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.add_box_rounded,
+                                          size: width * 0.1,
+                                          color: Colors.black,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, right: 290),
+                                    child: Text(
+                                      "$conter1",
+                                      style: TextStyle(fontSize: width * 0.065),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 300, top: 25),
+                                    child: CupertinoButton(
+                                        minSize: double.minPositive,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            if (conter != 0) {
+                                              conter1--;
+                                            }
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.indeterminate_check_box_rounded,
+                                          size: width * 0.1,
+                                          color: Colors.black,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 0,
+                                        right: 200,
+                                        left: 40,
+                                        top: 8),
+                                    child: Image.asset(
+                                      'assets/hose.png',
+                                      height: height * 0.17,
+                                      width: width * 0.19,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 100),
+                                child: Container(
+                                  height: height * 0.25,
+                                  width: width * 0.80,
+                                  child: HoseDetals(
                                     width: width * 0.05,
                                   ),
                                 ),
