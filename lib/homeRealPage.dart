@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:side_sheet/side_sheet.dart';
 import 'package:useer_app/homescreen/anboba.dart';
 
 import 'homescreen/hose.dart';
@@ -34,6 +36,9 @@ class _HomePageState extends State<HomePage> {
               Color.fromARGB(255, 245, 235, 219),
               Color.fromARGB(255, 255, 255, 252),
               Color.fromARGB(255, 255, 255, 252),
+              Colors.white,
+              Colors.white,
+              Colors.white,
               Color.fromARGB(255, 255, 255, 252),
               Color.fromARGB(255, 255, 255, 252),
               Color.fromARGB(255, 255, 255, 252),
@@ -47,9 +52,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Row(children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                        left: 45,
-                        top: 60,
+                      padding: EdgeInsets.only(
+                        left: width * 0.078,
+                        top: width * 0.15,
                       ),
                       child: Text(
                         "Dashboard",
@@ -57,12 +62,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 140, top: 47, right: 8),
+                      padding: EdgeInsets.only(
+                          left: width * 0.356,
+                          top: width * 0.13,
+                          right: width * 0.02),
                       child: CupertinoButton(
                           minSize: double.minPositive,
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () async {},
                           child: Icon(
                             Icons.account_box_sharp,
                             size: width * 0.08,
@@ -70,11 +77,15 @@ class _HomePageState extends State<HomePage> {
                           )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20, top: 47),
+                      padding: EdgeInsets.only(
+                          right: width * 0.03, top: width * 0.13),
                       child: CupertinoButton(
                           minSize: double.minPositive,
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            SideSheet.right(
+                                body: Text("Body"), context: context);
+                          },
                           child: Icon(
                             Icons.density_medium_sharp,
                             size: width * 0.073,
@@ -86,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                     height: height * 0.075,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 31),
+                    padding: EdgeInsets.only(right: width * 0.13),
                     child: Text(
                       "Hello, from database!",
                       style: TextStyle(
@@ -94,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 98),
+                    padding: EdgeInsets.only(right: width * 0.29),
                     child: Text(
                       "We glad to see you back",
                       style: TextStyle(fontSize: width * 0.05),
@@ -104,14 +115,15 @@ class _HomePageState extends State<HomePage> {
               ),
               SingleChildScrollView(
                   child: Padding(
-                padding: const EdgeInsets.only(left: 38, top: 250),
+                padding:
+                    EdgeInsets.only(left: width * 0.086, top: width * 0.60),
                 child: Container(
                   height: height * 0.65,
                   width: width * 0.90,
                   decoration: const BoxDecoration(color: Colors.transparent),
                   child: Stack(children: [
                     Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                        padding: EdgeInsets.only(top: width * 0.03),
                         child: Container(
                           height: height * 0.185,
                           width: width * 0.82,
@@ -124,18 +136,20 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 300),
+                                    padding:
+                                        EdgeInsets.only(right: width * 0.75),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
-                                        onPressed: () {
+                                        onPressed: () async {
                                           setState(() {
                                             conter++;
                                           });
+                                          await FirebaseAuth.instance.signOut();
                                         },
                                         child: Icon(
                                           Icons.add_box_rounded,
-                                          size: width * 0.1,
+                                          size: width * 0.11,
                                           color: Colors.black,
                                         )),
                                   ),
@@ -148,8 +162,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 300, top: 25),
+                                    padding: EdgeInsets.only(
+                                        right: width * 0.75,
+                                        top: width * 0.045),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
@@ -162,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           Icons.indeterminate_check_box_rounded,
-                                          size: width * 0.1,
+                                          size: width * 0.11,
                                           color: Colors.black,
                                         )),
                                   ),
@@ -172,11 +187,11 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                         bottom: 0,
-                                        right: 200,
-                                        left: 40,
-                                        top: 8),
+                                        right: width * 0.48,
+                                        left: width * 0.12,
+                                        top: width * 0.01),
                                     child: Image.asset(
                                       'assets/gas.png',
                                       height: height * 0.17,
@@ -212,7 +227,8 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 300),
+                                    padding:
+                                        EdgeInsets.only(right: width * 0.75),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
@@ -223,34 +239,35 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           Icons.add_box_rounded,
-                                          size: width * 0.1,
+                                          size: width * 0.11,
                                           color: Colors.black,
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, right: 290),
+                                    padding: EdgeInsets.only(
+                                        top: 20, right: width * 0.71),
                                     child: Text(
                                       "$conter1",
                                       style: TextStyle(fontSize: width * 0.065),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 300, top: 25),
+                                    padding: EdgeInsets.only(
+                                        right: width * 0.75,
+                                        top: width * 0.045),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
                                         onPressed: () {
                                           setState(() {
-                                            if (conter != 0) {
+                                            if (conter1 != 0) {
                                               conter1--;
                                             }
                                           });
                                         },
                                         child: Icon(
                                           Icons.indeterminate_check_box_rounded,
-                                          size: width * 0.1,
+                                          size: width * 0.11,
                                           color: Colors.black,
                                         )),
                                   ),
@@ -260,11 +277,11 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(
+                                    padding: EdgeInsets.only(
                                         bottom: 0,
-                                        right: 200,
-                                        left: 40,
-                                        top: 8),
+                                        right: width * 0.48,
+                                        left: width * 0.13,
+                                        top: width * 0.01),
                                     child: Image.asset(
                                       'assets/hose.png',
                                       height: height * 0.17,
@@ -274,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 100),
+                                padding: EdgeInsets.only(left: width * 0.19),
                                 child: Container(
                                   height: height * 0.25,
                                   width: width * 0.80,

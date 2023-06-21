@@ -19,6 +19,7 @@ class _HoseDetalsState extends State<HoseDetals> {
   Query dreamA = FirebaseDatabase.instance.ref().child('Products1');
   bool pressAttention = false;
   bool preesed = false;
+  Color GrayOfProduct = Color.fromARGB(153, 240, 227, 227);
   int conter = 2;
   Widget listingOrder({required Map smap}) => Column(
         children: [
@@ -51,7 +52,8 @@ class _HoseDetalsState extends State<HoseDetals> {
             height: MediaQuery.of(context).size.height * 0.005,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 60),
+            padding:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -61,7 +63,7 @@ class _HoseDetalsState extends State<HoseDetals> {
                   onPressed: () {},
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.075,
+                  width: MediaQuery.of(context).size.width * 0.05,
                 ),
                 IconButton(
                     onPressed: () {
@@ -72,10 +74,68 @@ class _HoseDetalsState extends State<HoseDetals> {
                         context: context,
                         builder:
                             (context, scrollController, bottomSheetOffset) {
+                          double height = MediaQuery.of(context).size.height;
+                          double width = MediaQuery.of(context).size.width;
                           return Container(
                             height: MediaQuery.of(context).size.height * 10,
                             width: MediaQuery.of(context).size.width * 10,
-                            color: Colors.black,
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(240, 240, 212, 140),
+                                Color.fromARGB(255, 245, 235, 219),
+                                Color.fromARGB(255, 255, 255, 252),
+                                Color.fromARGB(255, 255, 255, 252),
+                                Colors.white,
+                                Colors.white,
+                                Colors.white,
+                                Color.fromARGB(255, 255, 255, 252),
+                                Color.fromARGB(255, 255, 255, 252),
+                                Color.fromARGB(255, 255, 255, 252),
+                                Color.fromARGB(255, 245, 235, 219),
+                                Color.fromARGB(240, 240, 212, 140),
+                              ],
+                            )),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: height * 0.40,
+                                  width: width * 0.45,
+                                  decoration:
+                                      BoxDecoration(color: Colors.black),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 0, right: 0, left: 0, top: 8),
+                                    child: Image.asset(
+                                      'assets/hose.png',
+                                      height: height * 0.40,
+                                      width: width * 0.42,
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      smap['name'],
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.03),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.30,
+                                    ),
+                                    Text("EGP ${smap['price']}")
+                                  ],
+                                )
+                              ],
+                            ),
                           );
                         },
                         isExpand: false,

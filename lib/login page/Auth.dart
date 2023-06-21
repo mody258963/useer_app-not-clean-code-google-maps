@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:useer_app/homeRealPage.dart';
 
+import '../googleMapPage.dart';
 import 'login.dart';
 
 class Auth extends StatelessWidget {
@@ -14,7 +15,7 @@ class Auth extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const HomePage();
+              return const googleMapPage();
             } else {
               return const LoginPage();
             }
