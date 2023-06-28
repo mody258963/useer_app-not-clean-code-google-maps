@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               Color.fromARGB(240, 240, 212, 140),
             ],
           )),
-          child: Stack(
+          child: Column(
             children: [
               Column(
                 children: [
@@ -78,13 +78,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          right: width * 0.03, top: width * 0.13),
+                          right: width * 0.035, top: width * 0.13),
                       child: CupertinoButton(
                           minSize: double.minPositive,
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             SideSheet.right(
-                                body: Text("Body"), context: context);
+                                body: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {}, child: Text("orders"))
+                                  ],
+                                ),
+                                context: context);
                           },
                           child: Icon(
                             Icons.density_medium_sharp,
@@ -116,14 +123,14 @@ class _HomePageState extends State<HomePage> {
               SingleChildScrollView(
                   child: Padding(
                 padding:
-                    EdgeInsets.only(left: width * 0.086, top: width * 0.60),
+                    EdgeInsets.only(left: width * 0.086, top: width * 0.20),
                 child: Container(
                   height: height * 0.65,
                   width: width * 0.90,
                   decoration: const BoxDecoration(color: Colors.transparent),
                   child: Stack(children: [
                     Padding(
-                        padding: EdgeInsets.only(top: width * 0.03),
+                        padding: EdgeInsets.only(top: width * 0.01),
                         child: Container(
                           height: height * 0.185,
                           width: width * 0.82,
@@ -145,7 +152,6 @@ class _HomePageState extends State<HomePage> {
                                           setState(() {
                                             conter++;
                                           });
-                                          await FirebaseAuth.instance.signOut();
                                         },
                                         child: Icon(
                                           Icons.add_box_rounded,

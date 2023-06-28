@@ -15,7 +15,7 @@ class Auth extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const googleMapPage();
+              return const HomePage();
             } else {
               return const LoginPage();
             }
