@@ -36,7 +36,7 @@ class _HoseDetalsState extends State<HoseDetals> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.028,
+            height: MediaQuery.of(context).size.height * 0.020,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 50),
@@ -49,8 +49,9 @@ class _HoseDetalsState extends State<HoseDetals> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.005,
+            height: MediaQuery.of(context).size.height * 0.01,
           ),
+          Text('Price: ${smap['price']}', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.045 ),)
         ],
       );
 

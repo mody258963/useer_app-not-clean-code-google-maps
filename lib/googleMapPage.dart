@@ -273,7 +273,7 @@ class _googleMapPageState extends State<googleMapPage> {
       //get a float button to click and go to current location
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //_gotoUserCurrentPosition();
+          _gotoUserCurrentPosition();
           sendinglocation();
           //_liveLocation();
         },

@@ -43,7 +43,7 @@ class _AmbobaDetalsState extends State<AmbobaDetals> {
                               color:
                                   pressAttention ? Colors.white : Colors.black,
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.0251)),
+                                  MediaQuery.of(context).size.width * 0.024)),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.resolveWith<Color>(

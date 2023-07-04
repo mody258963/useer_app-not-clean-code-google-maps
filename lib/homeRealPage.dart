@@ -5,6 +5,7 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:useer_app/homescreen/anboba.dart';
 
 import 'homescreen/hose.dart';
+import 'homescreen/monzem.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 int conter = 0;
 int conter1 = 0;
-
+int conter2 = 0;
 class _HomePageState extends State<HomePage> {
   Color GrayOfProduct = Color.fromARGB(153, 240, 227, 227);
 
@@ -63,9 +64,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: width * 0.356,
+                          left: width * 0.46,
                           top: width * 0.13,
-                          right: width * 0.02),
+                          right: width * 0.005),
                       child: CupertinoButton(
                           minSize: double.minPositive,
                           padding: EdgeInsets.zero,
@@ -76,29 +77,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black,
                           )),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          right: width * 0.035, top: width * 0.13),
-                      child: CupertinoButton(
-                          minSize: double.minPositive,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            SideSheet.right(
-                                body: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton(
-                                        onPressed: () {}, child: Text("orders"))
-                                  ],
-                                ),
-                                context: context);
-                          },
-                          child: Icon(
-                            Icons.density_medium_sharp,
-                            size: width * 0.073,
-                            color: Colors.black,
-                          )),
-                    )
+                    
                   ]),
                   SizedBox(
                     height: height * 0.075,
@@ -121,10 +100,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SingleChildScrollView(
+                
                   child: Padding(
                 padding:
-                    EdgeInsets.only(left: width * 0.086, top: width * 0.20),
+                    EdgeInsets.only(left: width * 0.086, top: width * 0.09),
                 child: Container(
+
                   height: height * 0.65,
                   width: width * 0.90,
                   decoration: const BoxDecoration(color: Colors.transparent),
@@ -139,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Stack(
+                            
                             children: [
                               Column(
                                 children: [
@@ -148,20 +130,20 @@ class _HomePageState extends State<HomePage> {
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
-                                        onPressed: () async {
+                                        onPressed: () {
                                           setState(() {
                                             conter++;
                                           });
                                         },
                                         child: Icon(
                                           Icons.add_box_rounded,
-                                          size: width * 0.11,
+                                          size: width * 0.12,
                                           color: Colors.black,
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, right: 290),
+                                    padding: EdgeInsets.only(
+                                        top: width * 0.045, right: width * 0.70),
                                     child: Text(
                                       "$conter",
                                       style: TextStyle(fontSize: width * 0.065),
@@ -170,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: EdgeInsets.only(
                                         right: width * 0.75,
-                                        top: width * 0.045),
+                                        top: width * 0.033),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
@@ -183,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           Icons.indeterminate_check_box_rounded,
-                                          size: width * 0.11,
+                                          size: width * 0.12,
                                           color: Colors.black,
                                         )),
                                   ),
@@ -220,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         )),
                     Padding(
-                        padding: const EdgeInsets.only(top: 190),
+                        padding:  EdgeInsets.only(top: width * 0.45),
                         child: Container(
                           height: height * 0.185,
                           width: width * 0.82,
@@ -245,13 +227,13 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           Icons.add_box_rounded,
-                                          size: width * 0.11,
+                                          size: width * 0.12,
                                           color: Colors.black,
                                         )),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        top: 20, right: width * 0.71),
+                                        top: width * 0.045, right: width * 0.70),
                                     child: Text(
                                       "$conter1",
                                       style: TextStyle(fontSize: width * 0.065),
@@ -260,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: EdgeInsets.only(
                                         right: width * 0.75,
-                                        top: width * 0.045),
+                                        top: width * 0.033),
                                     child: CupertinoButton(
                                         minSize: double.minPositive,
                                         padding: EdgeInsets.zero,
@@ -273,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Icon(
                                           Icons.indeterminate_check_box_rounded,
-                                          size: width * 0.11,
+                                          size: width * 0.12,
                                           color: Colors.black,
                                         )),
                                   ),
@@ -309,9 +291,111 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         )),
+                        Padding(
+                        padding:  EdgeInsets.only(top: width *0.90),
+                        child: Container(
+                          height: height * 0.185,
+                          width: width * 0.82,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(153, 240, 227, 227),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Stack(
+                            children: [
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: width * 0.75),
+                                    child: CupertinoButton(
+                                        minSize: double.minPositive,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            conter2++;
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.add_box_rounded,
+                                          size: width * 0.12,
+                                          color: Colors.black,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: width * 0.045, right: width * 0.70),
+                                    child: Text(
+                                      "$conter2",
+                                      style: TextStyle(fontSize: width * 0.065),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        right: width * 0.75,
+                                        top: width * 0.033),
+                                    child: CupertinoButton(
+                                        minSize: double.minPositive,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () {
+                                          setState(() {
+                                            if (conter2 != 0) {
+                                              conter2--;
+                                            }
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.indeterminate_check_box_rounded,
+                                          size: width * 0.12,
+                                          color: Colors.black,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 0,
+                                        right: width * 0.48,
+                                        left: width * 0.13,
+                                        top: width * 0.01),
+                                    child: Image.asset(
+                                      'assets/mezan.png',
+                                      height: height * 0.17,
+                                      width: width * 0.19,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: width * 0.19),
+                                child: Container(
+                                  height: height * 0.25,
+                                  width: width * 0.80,
+                                  child: ReglatorDetals(
+                                    width: width * 0.05,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                        
                   ]),
                 ),
               )),
+              Padding(
+                          padding:  EdgeInsets.only(top: width * 0.0001,),
+                          child: Container(width: width * 0.82,
+                         
+                            child: ElevatedButton(child: Text("Confirm",textAlign: TextAlign.center),style: ElevatedButton.styleFrom(
+    primary: Colors.black, // Background color
+  ),onPressed: () {
+                              
+                            },),
+                          ),
+                        ),
             ],
           ),
         ),
