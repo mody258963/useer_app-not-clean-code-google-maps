@@ -1,21 +1,18 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ReglatorDetals extends StatefulWidget {
+class reglatodetals extends StatefulWidget {
   final double width;
-  ReglatorDetals({
-    super.key,
-    required this.width,
-  });
+  void Function()? onPressed;
+  reglatodetals({super.key, required this.width, required this.onPressed});
 
   @override
-  State<ReglatorDetals> createState() => _ReglatorDetalsState();
+  State<reglatodetals> createState() => _reglatodetalsState();
 }
 
-class _ReglatorDetalsState extends State<ReglatorDetals> {
+class _reglatodetalsState extends State<reglatodetals> {
   Query dreamA = FirebaseDatabase.instance.ref().child('Products2');
   bool pressAttention = false;
   bool preesed = false;
@@ -24,11 +21,11 @@ class _ReglatorDetalsState extends State<ReglatorDetals> {
   Widget listingOrder({required Map smap}) => Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.017,
+            height: MediaQuery.of(context).size.height * 0.015,
           ),
           Padding(
-            padding:  EdgeInsets.only(
-              right:  MediaQuery.of(context).size.height * 0.015,
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width * 0.025,
             ),
             child: Text(
               smap['name'],
@@ -36,23 +33,36 @@ class _ReglatorDetalsState extends State<ReglatorDetals> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.020,
+            height: MediaQuery.of(context).size.height * 0.010,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 50),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.35,
               child: Text(
-                "Gas cylinder regulators made to reduce the pressure of gas in the cylinder ",
+                "A gas cylinder regulator is an essential component of a gas delivery system that controls the pressure of gas flowing from a high-pressure gas cylinder to a lower pressure output. ",
                 maxLines: 4,
               ),
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
+            height: MediaQuery.of(context).size.height * 0.0085,
           ),
-          Text('Price: ${smap['price']}', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.045 ),)
-        ]
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.height * 0.17,
+            ),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.041,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black, // Background color
+                  ),
+                  onPressed: widget.onPressed,
+                  child: Text("Price: ${smap['price']}")),
+            ),
+          )
+        ],
       );
 
   @override

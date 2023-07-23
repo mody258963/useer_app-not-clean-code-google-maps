@@ -1,4 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,9 +5,11 @@ import 'package:flutter/material.dart';
 
 class HoseDetals extends StatefulWidget {
   final double width;
+  void Function()? onPressed;
   HoseDetals({
     super.key,
     required this.width,
+    required this.onPressed,
   });
 
   @override
@@ -18,17 +19,18 @@ class HoseDetals extends StatefulWidget {
 class _HoseDetalsState extends State<HoseDetals> {
   Query dreamA = FirebaseDatabase.instance.ref().child('Products1');
   bool pressAttention = false;
+
   bool preesed = false;
   Color GrayOfProduct = Color.fromARGB(153, 240, 227, 227);
-  int conter = 2;
+
   Widget listingOrder({required Map smap}) => Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
+            height: MediaQuery.of(context).size.height * 0.015,
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              right: 46,
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width * 0.12,
             ),
             child: Text(
               smap['name'],
@@ -36,22 +38,35 @@ class _HoseDetalsState extends State<HoseDetals> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.020,
+            height: MediaQuery.of(context).size.height * 0.010,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 50),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.35,
               child: Text(
-                "1 meter gas cylinder hose good quilty and two metel bellet ",
+                "1 meter gas cylinder hose good quilty and two metel bellet.",
                 maxLines: 4,
               ),
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
+            height: MediaQuery.of(context).size.height * 0.03,
           ),
-          Text('Price: ${smap['price']}', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.045 ),)
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.height * 0.17,
+            ),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.041,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black, // Background color
+                  ),
+                  onPressed: widget.onPressed,
+                  child: Text("Price: ${smap['price']}")),
+            ),
+          )
         ],
       );
 

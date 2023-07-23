@@ -51,9 +51,8 @@ dependencies:
   google_places_autocomplete_text_field: ^0.1.1
   place_picker: ^0.10.0
   flutter_google_places_web: ^1.0.2
-  sign_in_with_apple: ^4.3.0
+  sign_in_with_apple: ^5.0.0
   modal_bottom_sheet: ^2.1.2
-  bottom_sheet: ^3.1.2
   side_sheet: ^1.0.4
   
 

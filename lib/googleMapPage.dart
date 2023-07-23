@@ -8,28 +8,31 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_autocomplete_text_field/model/prediction.dart';
 import 'package:lottie/lottie.dart';
-import 'package:useer_app/homesnap.dart';
-import 'package:useer_app/order.dart';
+import 'package:useer_app/homeRealPage.dart';
 
+import 'detalspage.dart';
 import 'login page/global.dart';
 
 class googleMapPage extends StatefulWidget {
-  const googleMapPage({Key? key}) : super(key: key);
+  googleMapPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<googleMapPage> createState() => _googleMapPageState();
 }
 
+final Completer<GoogleMapController> _googleMapController = Completer();
+CameraPosition? _cameraPosition;
+late LatLng _defaultLatLng;
+late LatLng _draggedLatlng;
+String _draggedAddress = "";
+TextEditingController searchbarcontroller = TextEditingController();
+String? lat;
+String? long;
+
 class _googleMapPageState extends State<googleMapPage> {
   //get map controller to access map
-  final Completer<GoogleMapController> _googleMapController = Completer();
-  CameraPosition? _cameraPosition;
-  late LatLng _defaultLatLng;
-  late LatLng _draggedLatlng;
-  String _draggedAddress = "";
-  TextEditingController searchbarcontroller = TextEditingController();
-  String? lat;
-  String? long;
 
   @override
   void initState() {
@@ -61,39 +64,49 @@ class _googleMapPageState extends State<googleMapPage> {
     });
   }
 
-  Future sendinglocation() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref().child("trender");
-
-    await ref.child(fAuth.currentUser!.uid).set({
-      "name": fAuth.currentUser?.uid,
-      "age": 'https://www.google.com/maps/search/$lat,$long',
-      "adress": _draggedAddress,
-    });
-  }
-
   Widget _buildBody() {
     return Stack(children: [
       _getMap(),
       _getCustomPin(),
-      _showDraggedAddress(),
-      _searchBar(),
+      //_showDraggedAddress(),
+      //_searchBar(),
       _button()
     ]);
   }
 
   Widget _button() {
-    return Padding(
-      padding: const EdgeInsets.all(50),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                _liveLocation();
-              },
-              child: const Text("efdfdf"))
-        ],
-      ),
+    double width = MediaQuery.of(context).size.width;
+    double hight = MediaQuery.of(context).size.height;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(width * 0.02),
+              child: Container(
+                height: hight * 0.06,
+                width: width * 0.90,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black, // Background color
+                    ),
+                    onPressed: () {
+                      _liveLocation();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetalsPage()));
+                    },
+                    child: Text(
+                      "Confirm",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: width * 0.04),
+                    )),
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 
@@ -142,6 +155,7 @@ class _googleMapPageState extends State<googleMapPage> {
 
   Widget _getMap() {
     return GoogleMap(
+      zoomControlsEnabled: false,
       initialCameraPosition:
           _cameraPosition!, //initialize camera position for map
       mapType: MapType.normal,
@@ -237,48 +251,50 @@ class _googleMapPageState extends State<googleMapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: ListView(children: [
-          ListTile(
-            title: const Text("home "),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ));
+    double width = MediaQuery.of(context).size.width;
+    double hight = MediaQuery.of(context).size.height;
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.of(context).pop();
             },
+            color: Colors.black,
           ),
-          ListTile(
-            title: const Text("orders "),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Orderpage(),
-                  ));
+        ),
+        body: _buildBody(),
+        //get a float button to click and go to current location
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: hight * 0.069),
+          child: FloatingActionButton(
+            backgroundColor: Colors.black,
+            onPressed: () {
+              _gotoUserCurrentPosition();
+              //sendinglocation();
+              //_liveLocation();
             },
+            child: const Icon(Icons.gps_fixed_outlined),
           ),
-          ListTile(
-            title: const Text("Sign out "),
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-            },
-          )
-        ]),
-      ),
-      body: _buildBody(),
-      //get a float button to click and go to current location
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _gotoUserCurrentPosition();
-          sendinglocation();
-          //_liveLocation();
-        },
-        child: const Icon(Icons.location_on),
+        ),
       ),
     );
   }
+
+  void showMaterialModalBottom(
+      {required BuildContext context,
+      required SingleChildScrollView Function(dynamic context) builder}) {}
 }
+
+class MyDataModel1 {
+  Map<String, dynamic> toJson() {
+    return {
+      "name": fAuth.currentUser?.uid,
+      "age": 'https://www.google.com/maps/search/$lat,$long',
+      "adress": _draggedAddress,
+    };
+  }
+}
+
+MyDataModel1 myDataModel1 = MyDataModel1();

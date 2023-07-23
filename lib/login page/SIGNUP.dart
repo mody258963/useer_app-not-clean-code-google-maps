@@ -319,8 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             if (signUp() == null) {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const googleMapPage()));
+                                      builder: (context) => googleMapPage()));
                             }
                           },
                           style: ElevatedButton.styleFrom(
