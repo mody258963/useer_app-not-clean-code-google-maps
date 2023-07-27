@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:useer_app/homescreen/anboba.dart';
-
-import 'detalspage.dart';
 import 'googleMapPage.dart';
 import 'homescreen/hose.dart';
 import 'homescreen/monzem.dart';
