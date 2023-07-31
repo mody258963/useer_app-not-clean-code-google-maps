@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:useer_app/homescreen/anboba.dart';
 import 'googleMapPage.dart';
@@ -38,6 +39,10 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
+        theme: ThemeData(
+    primarySwatch: Colors.blue,
+    fontFamily: 'ReadexPro',
+  ),
         home: Scaffold(
       body: Center(
         child: Container(
@@ -148,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: width * 0.75,
-                                          top: width * 0.029),
+                                          top: width * 0.027),
                                       child: CupertinoButton(
                                           minSize: double.minPositive,
                                           padding: EdgeInsets.zero,
@@ -248,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: width * 0.75,
-                                          top: width * 0.029),
+                                          top: width * 0.027),
                                       child: CupertinoButton(
                                           minSize: double.minPositive,
                                           padding: EdgeInsets.zero,
@@ -348,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: width * 0.75,
-                                          top: width * 0.029),
+                                          top: width * 0.027),
                                       child: CupertinoButton(
                                           minSize: double.minPositive,
                                           padding: EdgeInsets.zero,
@@ -424,6 +429,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => googleMapPage()));
                     },
+                  
                   ),
                 ),
               ),

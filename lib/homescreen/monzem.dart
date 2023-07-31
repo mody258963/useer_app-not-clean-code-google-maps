@@ -40,13 +40,13 @@ class _reglatodetalsState extends State<reglatodetals> {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.35,
               child: Text(
-                "A gas cylinder regulator is an essential component of a gas delivery system that controls the pressure of gas flowing from a high-pressure gas cylinder to a lower pressure output. ",
+                "A gas cylinder regulator to control the preture ",
                 maxLines: 4,
               ),
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.0085,
+            height: MediaQuery.of(context).size.height * 0.018,
           ),
           Padding(
             padding: EdgeInsets.only(

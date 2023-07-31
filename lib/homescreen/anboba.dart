@@ -26,7 +26,7 @@ class _AmbobaDetalsState extends State<AmbobaDetals> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width * 0.12,
+              right: MediaQuery.of(context).size.width * 0.09,
             ),
             child: Text(
               smap['name'],
@@ -34,20 +34,21 @@ class _AmbobaDetalsState extends State<AmbobaDetals> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.010,
+            height: MediaQuery.of(context).size.height * 0.009,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 50),
+            padding:  EdgeInsets.only(left:  MediaQuery.of(context).size.height * 0.022),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.35,
               child: Text(
-                "1 meter gas cylinder hose good quilty and two metel bellet.",
-                maxLines: 4,
+                "Rifilling a the gas cylindyer. ",
+                maxLines: 3,
+                style: TextStyle(letterSpacing: MediaQuery.of(context).size.height * 0.0001,),
               ),
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.025,
+            height: MediaQuery.of(context).size.height * 0.035,
           ),
           Padding(
             padding: EdgeInsets.only(

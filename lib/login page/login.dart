@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:useer_app/login%20page/SIGNUP.dart';
 import 'package:useer_app/login%20page/forgotPage.dart';
 
@@ -42,6 +43,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signip() async {
+showDialog(context: context, builder: (context){
+return Center(
+        child: LoadingAnimationWidget.dotsTriangle(
+         color: Colors.black,         
+          size: 50,
+        ),
+      );
+
+
+
+});
+
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
       try {
@@ -57,6 +70,8 @@ class _LoginPageState extends State<LoginPage> {
         return null;
       }
     }
+
+    Navigator.of(context).pop();
   }
 
   @override

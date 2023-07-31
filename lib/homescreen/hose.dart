@@ -45,13 +45,14 @@ class _HoseDetalsState extends State<HoseDetals> {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.35,
               child: Text(
-                "1 meter gas cylinder hose good quilty and two metel bellet.",
+                "1 meter gas cylinder hose good quilty.",
                 maxLines: 4,
+                style: TextStyle(letterSpacing: MediaQuery.of(context).size.height * 0.0001,),
               ),
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.03,
+            height: MediaQuery.of(context).size.height * 0.018,
           ),
           Padding(
             padding: EdgeInsets.only(

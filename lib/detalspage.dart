@@ -35,6 +35,8 @@ class _DetalsPageState extends State<DetalsPage> {
     await ref.child(fAuth.currentUser!.uid).set(myDataModel.toJson());
   }
 
+
+
   Future locaitonOnMap() async {
     DatabaseReference ref = FirebaseDatabase.instance
         .ref()
@@ -52,7 +54,25 @@ class _DetalsPageState extends State<DetalsPage> {
 
     await ref.child("detals").set(myDataModel12.toJson());
   }
+  
+   Future adressBackup() async {
+    DatabaseReference ref = FirebaseDatabase.instance
+        .ref()
+        .child("saved adress")
+        .child(fAuth.currentUser!.uid);
 
+    await ref.child("detals").set(myDataModel12.toJson());
+  
+  }
+
+ Future locaitonOnMapsavedadress() async {
+    DatabaseReference ref = FirebaseDatabase.instance
+        .ref()
+        .child("saved adress")
+        .child(fAuth.currentUser!.uid);
+
+    await ref.child("locationOnmap").set(myDataModel1.toJson());
+  }
   double right = 0.08;
   double left = 0.08;
   double top = 0.01;
@@ -275,6 +295,8 @@ class _DetalsPageState extends State<DetalsPage> {
                             orderPage();
                             locaitonOnMap();
                             Genraldetals();
+                            locaitonOnMapsavedadress();
+                            adressBackup();
                           }
                         },
                         child: Text(

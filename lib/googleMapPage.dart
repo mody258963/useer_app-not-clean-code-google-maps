@@ -254,6 +254,7 @@ class _googleMapPageState extends State<googleMapPage> {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return MaterialApp(
+      
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -277,7 +278,7 @@ class _googleMapPageState extends State<googleMapPage> {
             },
             child: const Icon(Icons.gps_fixed_outlined),
           ),
-        ),
+        ),  
       ),
     );
   }
@@ -290,8 +291,8 @@ class _googleMapPageState extends State<googleMapPage> {
 class MyDataModel1 {
   Map<String, dynamic> toJson() {
     return {
-      "name": fAuth.currentUser?.uid,
-      "age": 'https://www.google.com/maps/search/$lat,$long',
+      "uid": fAuth.currentUser?.uid,
+      "location link": 'https://www.google.com/maps/search/$lat,$long',
       "adress": _draggedAddress,
     };
   }
