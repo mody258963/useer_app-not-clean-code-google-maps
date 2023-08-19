@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:useer_app/datapage.dart';
+import 'package:useer_app/loadingScreen.dart';
 import 'package:useer_app/googleMapPage.dart';
 import 'package:useer_app/homeRealPage.dart';
 
@@ -35,8 +35,6 @@ class _DetalsPageState extends State<DetalsPage> {
     await ref.child(fAuth.currentUser!.uid).set(myDataModel.toJson());
   }
 
-
-
   Future locaitonOnMap() async {
     DatabaseReference ref = FirebaseDatabase.instance
         .ref()
@@ -54,18 +52,17 @@ class _DetalsPageState extends State<DetalsPage> {
 
     await ref.child("detals").set(myDataModel12.toJson());
   }
-  
-   Future adressBackup() async {
+
+  Future adressBackup() async {
     DatabaseReference ref = FirebaseDatabase.instance
         .ref()
         .child("saved adress")
         .child(fAuth.currentUser!.uid);
 
     await ref.child("detals").set(myDataModel12.toJson());
-  
   }
 
- Future locaitonOnMapsavedadress() async {
+  Future locaitonOnMapsavedadress() async {
     DatabaseReference ref = FirebaseDatabase.instance
         .ref()
         .child("saved adress")
@@ -73,6 +70,7 @@ class _DetalsPageState extends State<DetalsPage> {
 
     await ref.child("locationOnmap").set(myDataModel1.toJson());
   }
+
   double right = 0.08;
   double left = 0.08;
   double top = 0.01;

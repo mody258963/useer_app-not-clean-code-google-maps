@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_places_autocomplete_text_field/google_places_autocomplete_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -9,7 +11,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_autocomplete_text_field/model/prediction.dart';
 import 'package:lottie/lottie.dart';
 import 'package:useer_app/homeRealPage.dart';
-
+import 'package:useer_app/loadingScreen.dart';
+import 'package:restart_app/restart_app.dart';
 import 'detalspage.dart';
 import 'login page/global.dart';
 
@@ -30,6 +33,7 @@ String _draggedAddress = "";
 TextEditingController searchbarcontroller = TextEditingController();
 String? lat;
 String? long;
+bool isLoading = true;
 
 class _googleMapPageState extends State<googleMapPage> {
   //get map controller to access map
@@ -37,6 +41,12 @@ class _googleMapPageState extends State<googleMapPage> {
   @override
   void initState() {
     _init();
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+
     super.initState();
   }
 
@@ -92,7 +102,7 @@ class _googleMapPageState extends State<googleMapPage> {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black, // Background color
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       _liveLocation();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DetalsPage()));
@@ -207,7 +217,7 @@ class _googleMapPageState extends State<googleMapPage> {
   }
 
   //get user's current location and set the map's camera to that location
-  Future _gotoUserCurrentPosition() async {
+  _gotoUserCurrentPosition() async {
     Position currentPosition = await _determineUserCurrentPosition();
     _gotoSpecificPosition(
         LatLng(currentPosition.latitude, currentPosition.longitude));
@@ -222,7 +232,7 @@ class _googleMapPageState extends State<googleMapPage> {
     await _getAddress(position);
   }
 
-  Future _determineUserCurrentPosition() async {
+  _determineUserCurrentPosition() async {
     LocationPermission locationPermission;
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     //check if user enable service for location permission
@@ -254,32 +264,34 @@ class _googleMapPageState extends State<googleMapPage> {
     double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     return MaterialApp(
-      
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: BackButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            color: Colors.black,
-          ),
-        ),
-        body: _buildBody(),
-        //get a float button to click and go to current location
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: hight * 0.069),
-          child: FloatingActionButton(
-            backgroundColor: Colors.black,
-            onPressed: () {
-              _gotoUserCurrentPosition();
-              //sendinglocation();
-              //_liveLocation();
-            },
-            child: const Icon(Icons.gps_fixed_outlined),
-          ),
-        ),  
-      ),
+      home: isLoading
+          ? const LoadingScreen()
+          : Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                leading: BackButton(
+                  onPressed: () {
+                    Restart.restartApp();
+                    Navigator.of(context).pop();
+                  },
+                  color: Colors.black,
+                ),
+              ),
+              body: _buildBody(),
+              //get a float button to click and go to current location
+              floatingActionButton: Padding(
+                padding: EdgeInsets.only(bottom: hight * 0.069),
+                child: FloatingActionButton(
+                  backgroundColor: Colors.black,
+                  onPressed: () {
+                    _gotoUserCurrentPosition();
+                    //sendinglocation();
+                    _liveLocation();
+                  },
+                  child: const Icon(Icons.gps_fixed_outlined),
+                ),
+              ),
+            ),
     );
   }
 
